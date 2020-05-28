@@ -27,9 +27,9 @@
                             <div class="row">
                                 <div class="col-md-9 col-lg-8 mx-auto">
                                     <h3 class="login-heading mb-4">Registro de Tienda</h3>
-                                    <form action="../RegistroTienda" method="POST">
+                                    <form action="../RegistrarTienda" method="POST">
                                         <div class="form-label-group">
-                                            <input type="text" id="inputNombre" class="form-control" placeholder="Nombre" required autofocus>
+                                            <input type="text" name="inputNombre" class="form-control" placeholder="Nombre" required autofocus>
                                             <label for="inputNombre">Nombre</label>
                                         </div>
                                         <div class="form-label-group">

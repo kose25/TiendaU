@@ -5,6 +5,7 @@
  */
 package CONTROLLER;
 
+import NEGOCIO.TiendaU;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -32,8 +33,9 @@ public class RegistrarTienda extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try{
-           String nombre = request.getParameter("inputNombre");
+        try {
+            TiendaU tu = new TiendaU();
+            String nombre = request.getParameter("inputNombre");
             String lema = request.getParameter("inputLema");
             String descripcion = request.getParameter("inputDescripcion");
             String email = request.getParameter("inputEmail");
@@ -42,8 +44,21 @@ public class RegistrarTienda extends HttpServlet {
             String facebook = request.getParameter("inputFacebook");
             String sitio = request.getParameter("inputWeb");
             String imagen = request.getParameter("inputImagen");
-        }catch(Exception e){
-            
+            if (tu.registrarTienda(nombre, lema, descripcion, email, clave, propietario, facebook, lema, imagen)) {
+                response.setContentType("text/html");
+                PrintWriter pw = response.getWriter();
+                pw.println("<script type=\"text/javascript\">");
+                pw.println("alert('Registro exitoso');");
+                pw.println("</script>");
+                request.getSession().setAttribute("resultado", tu);
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            }else{
+                 request.getSession().setAttribute("error", "error");
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            }
+        } catch (Exception e) {
+            request.getSession().setAttribute("error", e.getMessage());
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
 
