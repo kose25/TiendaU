@@ -33,7 +33,7 @@ public class Test {
         Tienda t = new Tienda(4, "tienda test", "lema", "tienda@gmail.com", "clave", "propietario", "facebook", "web", "imagen");
         tiendaDAO.create(t);
 
-        Servicio s = new Servicio(2, "servicio prueba", "descripcion prueba");
+        Servicio s = new Servicio(2, "servicio prueba", "descripcion", tiendaDAO.findTienda(3));
         servicioDAO.create(s);
 
         try {
