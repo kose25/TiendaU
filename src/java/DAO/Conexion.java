@@ -13,25 +13,36 @@ import javax.persistence.Persistence;
  * @author kose_
  */
 public class Conexion {
-    private static Conexion conexion;
-    private EntityManagerFactory bd; 
- 
+       private static Conexion conexion;
+    private EntityManagerFactory bd;
+    private static EntityManagerFactory em = null;
+
     private Conexion() {
-        this.bd=Persistence.createEntityManagerFactory("TiendaU1151383PU");
-         
+        em = this.getEm();
+        this.bd = Persistence.createEntityManagerFactory("TiendaU1151383PU");
     }
-     
-     
-    public static Conexion getConexion()
-    {
-        if(conexion==null)
-        {
-            conexion=new Conexion();
+
+    public static Conexion getConexion() {
+        if (conexion == null) {
+            conexion = new Conexion();
         }
-    return conexion;
+        return conexion;
     }
- 
+
     public EntityManagerFactory getBd() {
         return bd;
-    } 
+    }
+
+    public static EntityManagerFactory getEm() {
+
+        if (em == null) {
+
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("TiendaU1151383PU");
+            em = emf;
+
+        }
+
+        return em;
+
+    }
 }
